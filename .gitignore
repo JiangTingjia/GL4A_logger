@@ -30,3 +30,4 @@
 *.exe
 *.out
 *.app
+/GL4A_logger/
