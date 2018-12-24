@@ -13,7 +13,9 @@
   可记录在控制台中，自由选择功能开关；<br>
   可记录在文件中，自由选择功能开关；<br>
   可自由添加组件/模块，分模块记录，模块可自由开关；<br>
-  可自由配置日志等级。<br>
+  可自由配置日志等级；<br>
+  支持实时配置日志参数；<br>
+  支持多线程操作。<br>
 # 3 组成
 ## 3.1 主要概念
   组件、日志记录器、等级<br>
@@ -39,6 +41,36 @@ GL4A_ERROR_LOG("M0", __F__, __L__, "XXX函数，OUT！\n");
 // 在程序出口处，关闭日志库
 GL4A_close();
 }
+~~~
+~~~
+{
+	cout << "欢迎使用GL4A：基本用法" << endl;
+	cout << "版本：" << GL4A_VERSION << endl;
+	errHandle err = errHandle();
+	// 初始化日志库（在程序入口处）
+	cout << "对GL4A进行初始化......，默认配置文件路径：" << GL4A_DEFAULT_CONFIG_DIR << endl;
+	err = GL4A_init(GL4A_DEFAULT_CONFIG_DIR);
+	if (err == 0)
+	{
+		cout << "日志库初始化成功" << endl;
+	}
+	else
+	{
+		cout << "日志库初始化失败" << endl;
+	}
+
+	// 将 组件 M0 输出到 TRACE 和 ERROR
+	// 在上一级目录下生成log文件夹，分别含有critical/rolling/daily三个文件夹
+	// 由于默认配置文件中只开启了daily日志记录器，所有仅daily中记录了 trace 和 error
+	GL4A_TRACE_LOG("M0", __F__, __L__, "TRACE 测试成功！\n");
+	GL4A_ERROR_LOG("M0", __F__, __L__, "ERROR 测试成功！\n");
+
+	// .... 继续输出
+
+	// 关闭日志库（在程序退出时）
+	cout << "日志库使用完毕!" << endl;
+	GL4A_close();
+  }
 ~~~
 注：当程序发生崩溃时，相应函数入口ERROR IN会被记录，但ERROR OUT不会被记录，那么，根据记录的文件名和行号，即可定位崩溃发生的位置。
 在记录ERROR时，同时会在TRACE中备份记录一份，用于保持TRACE记录上下文的完整性。<br>
