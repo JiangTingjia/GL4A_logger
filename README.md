@@ -28,6 +28,9 @@
 ## 4.1 基本用法
 ~~~
 {
+//引用头文件
+#include "GL4A_user.h"
+
 // 在程序入口处，根据配置文件路径，初始化日志库
 eGL4A_init(GL4A_DEFAULT_CONFIG_DIR);
 
