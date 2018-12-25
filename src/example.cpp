@@ -137,7 +137,7 @@ void multiThread()
 	genConfigDefault();
 }
 
-void main()
+int main()
 {
 	// 生成默认配置文件
 	genConfigDefault();
@@ -149,7 +149,7 @@ void main()
 	multiThread();
 	// 退出时恢复默认配置文件
 	genConfigDefault();
-	return;
+    return 0;
 }
 
 void WriteData1(void)
